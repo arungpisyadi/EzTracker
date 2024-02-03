@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TZ', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -8,15 +8,16 @@
         "doctrine/dbal": "^3.5.3",
         "eusonlito/captcha": "^1.1.1",
         "eusonlito/laravel-meta": "^3.3",
-        "laravel/framework": "^10.0",
+        "laravel/framework": "^10.10",
         "laravel/helpers": "^1.6",
         "predis/predis": "^2.1.1",
+        "rap2hpoutre/laravel-log-viewer": "^2.3",
         "sentry/sentry-laravel": "^4.1",
         "sibyx/phpgpx": "^1.2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "dev-master",
-        "brianium/paratest": "7.x-dev",
+        "brianium/paratest": "7.3.1",
         "friendsofphp/php-cs-fixer": "^3.48",
         "larastan/larastan": "2.x-dev",
         "laravel/pint": "dev-main",
@@ -40,7 +41,8 @@
     },
     "autoload": {
         "classmap": [
-            "database/migrations"
+            "database/migrations",
+            "database"
         ],
         "psr-4": {
             "App\\": "app/",
@@ -62,33 +64,23 @@
             "@composer dump-autoload",
             "@composer artisan-cache --ansi"
         ],
-
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-
-        "post-update-cmd": [
-            "@php artisan test"
-        ],
-
         "artisan-cache-clear": [
             "@php artisan optimize:clear --ansi"
         ],
-
         "artisan-cache": [
             "@php artisan optimize --ansi",
             "@php artisan view:cache --ansi"
         ],
-
         "artisan-server-start-all": [
             "@php artisan server:start:all --reset || true"
         ],
-
         "env-version": [
             "sed -i 's/CACHE_VERSION=.*/CACHE_VERSION='$(head -c 16 /dev/urandom | md5sum | head -c 32)'/' .env"
         ],
-
         "deploy": [
             "Composer\\Config::disableProcessTimeout",
             "rm -f bootstrap/cache/*.php",
@@ -102,7 +94,6 @@
             "@php artisan queue:restart --ansi",
             "@composer artisan-server-start-all"
         ],
-
         "deploy-dev": [
             "Composer\\Config::disableProcessTimeout",
             "rm -f bootstrap/cache/*.php",
@@ -114,7 +105,6 @@
             "@php artisan queue:restart --ansi",
             "@composer artisan-server-start-all"
         ],
-
         "deploy-docker": [
             "Composer\\Config::disableProcessTimeout",
             "rm -f bootstrap/cache/*.php",
@@ -125,18 +115,15 @@
             "@php artisan queue:restart --ansi",
             "@composer artisan-server-start-all"
         ],
-
         "fix": [
             "@php ./vendor/bin/php-cs-fixer fix -v --ansi",
             "@php ./vendor/bin/pint -v"
         ],
-
         "quality": [
             "@php artisan insights -v --ansi || true",
             "@php ./vendor/bin/phpstan analyse --ansi || true",
             "@php ./vendor/bin/psalm --no-cache || true"
         ],
-
         "translation": [
             "@php artisan core:translation:fix --ansi",
             "@php artisan core:translation:fill --ansi",
